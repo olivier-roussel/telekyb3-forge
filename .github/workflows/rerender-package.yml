@@ -73,7 +73,7 @@ jobs:
       uses: peter-evans/create-pull-request@v7
       with:
         base: main
-        token: ${{ secrets.TEST_PAT2 }}
+        token: ${{ secrets.OLIVIER_PAT_BOT_PR }}
         commit-message: Rebuild ${{ inputs.package }} build number ${{ env.NEW_BUILD_NUMBER }}
         committer: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
         author: ${{ github.actor }} <${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com>
@@ -97,7 +97,7 @@ jobs:
       uses: peter-evans/create-pull-request@v7
       with:
         base: main
-        token: ${{ secrets.TEST_PAT2 }}
+        token: ${{ secrets.OLIVIER_PAT_BOT_PR }}
         commit-message: Rebuild ${{ inputs.package }} build number ${{ env.NEW_BUILD_NUMBER }}
         committer: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
         author: ${{ github.actor }} <${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com>
