@@ -15,6 +15,12 @@ jobs:
       package: genom3
       requires-prs: ""
     secrets: inherit
+  rerender-pocolibs:
+    uses: ./.github/workflows/rerender-package.yml
+    with:
+      package: pocolibs
+      requires-prs: ""
+    secrets: inherit
   # Example to re-render another package fooA that depends on genom3 and fooB for example
   # rerender-fooA:
   #   needs: [rerender-genom3, rerender-fooB]

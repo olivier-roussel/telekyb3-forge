@@ -6,6 +6,9 @@ jobs:
   build-publish-genom3:
     uses: ./.github/workflows/build-genom3.yml
     secrets: inherit
+  build-publish-pocolibs:
+    uses: ./.github/workflows/build-pocolibs.yml
+    secrets: inherit
   # build-publish-fooA:
   #   uses: ./.github/workflows/build-fooA.yml
   #   needs: [build-publish-genom3, build-publish-fooB]

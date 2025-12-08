@@ -94,17 +94,17 @@ jobs:
         rattler-build build --recipe ${{ inputs.package-name }}/recipe/recipe.yaml --variant-config $CONFIG_FILE --output-dir ${{ env.PKG_DIR }} --experimental -c conda-forge -c https://prefix.dev/${{ inputs.channel }} --channel-priority disabled
 
     # Remove already existing package if any
-    # - name: Remove existing package
-    #   shell: bash -l {0}
-    #   run: |
-    #     cd ${{ env.PKG_DIR }}/${{ inputs.platform }}
-    #     for file in *${{ inputs.package-name }}*.conda; do
-    #       curl -X DELETE https://prefix.dev/api/v1/delete/${{ inputs.channel }}/${{ inputs.platform }}/$file -H "Authorization: Bearer ${{ secrets.api-key }}"
-    #     done
+    - name: Remove existing package
+      shell: bash -l {0}
+      run: |
+        cd ${{ env.PKG_DIR }}/${{ inputs.platform }}
+        for file in *${{ inputs.package-name }}*.conda; do
+          curl -X DELETE https://prefix.dev/api/v1/delete/${{ inputs.channel }}/${{ inputs.platform }}/$file -H "Authorization: Bearer ${{ secrets.api-key }}"
+        done
 
-    # - name: Publish conda package
-    #   shell: bash -l {0}
-    #   run: |
-    #     for file in ${{ env.PKG_DIR }}/**/*${{ inputs.package-name }}*.conda; do
-    #       rattler-build upload prefix -c ${{ inputs.channel }} --api-key ${{ secrets.api-key }} "$file"
-    #     done
+    - name: Publish conda package
+      shell: bash -l {0}
+      run: |
+        for file in ${{ env.PKG_DIR }}/**/*${{ inputs.package-name }}*.conda; do
+          rattler-build upload prefix -c ${{ inputs.channel }} --api-key ${{ secrets.api-key }} "$file"
+        done
