@@ -1,0 +1,59 @@
+context:
+  name: pocolibs
+  version: 3.3
+  build_num: 0
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://www.openrobots.org/distfiles/pocolibs/pocolibs-${{ version }}.tar.gz
+  sha256: bba1616282c7208145ca22e5fe45e4b551024c7ccf9eff732a1ced6c1fc837b0
+
+build:
+  number: ${{ build_num }}
+
+requirements:
+  build:
+    - ${{ compiler('cxx') }}
+    - ${{ stdlib('c') }}
+    - autoconf
+    - automake
+    - libtool
+    - make
+    - pkg-config
+
+  run_exports:
+    - ${{ pin_subpackage(name, upper_bound='x.x.x') }}
+
+tests:
+  - script:
+      - bin/h2 version
+
+  - package_contents:
+      bin:
+        - h2
+      include:
+        # these headers should be always part of the package, but testing only
+        # one of them should be enough
+        - posterLib.h
+        - mboxLib.h
+        - commonStructLib.h
+      lib:
+        - portLib
+        - posterLib
+        - comLib
+      files:
+        - lib/pkgconfig/pocolibs.pc
+
+about:
+  homepage: http://robotpkg.openrobots.org/robotpkg/middleware/pocolibs/index.html
+  summary: System communication and real-time primitive layers used by GenoM modules.
+  license: ISC
+  license_file: LICENSE
+  repository: https://git.openrobots.org/projects/pocolibs
+
+extra:
+  recipe-maintainers:
+    - olivier-roussel
