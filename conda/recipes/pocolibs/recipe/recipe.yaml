@@ -1,7 +1,7 @@
 context:
   name: pocolibs
   version: 3.3
-  build_num: 0
+  build_num: 1
 
 package:
   name: ${{ name }}
@@ -16,7 +16,7 @@ build:
 
 requirements:
   build:
-    - ${{ compiler('cxx') }}
+    - ${{ compiler('c') }}
     - ${{ stdlib('c') }}
     - autoconf
     - automake
