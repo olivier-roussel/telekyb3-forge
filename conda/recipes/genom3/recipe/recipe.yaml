@@ -1,7 +1,7 @@
 context:
   name: genom3
   version: 2.99.46
-  build_num: 1
+  build_num: 2
 
 package:
   name: ${{ name }}
