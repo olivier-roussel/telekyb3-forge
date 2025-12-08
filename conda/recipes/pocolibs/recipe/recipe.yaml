@@ -11,6 +11,10 @@ source:
   url: https://www.openrobots.org/distfiles/pocolibs/pocolibs-${{ version }}.tar.gz
   sha256: bba1616282c7208145ca22e5fe45e4b551024c7ccf9eff732a1ced6c1fc837b0
 
+  patches:
+    # fix missing header <stdio.h>, fails on osx only
+    - patches/0001-add-missing-header-stdio.patch
+
 build:
   number: ${{ build_num }}
 
