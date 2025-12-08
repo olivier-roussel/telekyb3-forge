@@ -72,7 +72,7 @@ jobs:
       if: ${{ env.NEEDS_UPDATE == 1 && inputs.requires-prs == '' }}
       uses: peter-evans/create-pull-request@v7
       with:
-        base: master
+        base: main
         token: ${{ secrets.OLIVIER_PAT_BOT_PR }}
         commit-message: Rebuild ${{ inputs.package }} build number ${{ env.NEW_BUILD_NUMBER }}
         committer: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
@@ -96,7 +96,7 @@ jobs:
       if: ${{ env.NEEDS_UPDATE == 1 && inputs.requires-prs != '' }}
       uses: peter-evans/create-pull-request@v7
       with:
-        base: master
+        base: main
         token: ${{ secrets.OLIVIER_PAT_BOT_PR }}
         commit-message: Rebuild ${{ inputs.package }} build number ${{ env.NEW_BUILD_NUMBER }}
         committer: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
