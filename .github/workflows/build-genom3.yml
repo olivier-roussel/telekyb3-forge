@@ -26,7 +26,7 @@ jobs:
         run: |
           echo "Pull Request was not opened with a depends-on label, continuing..."
 
-  build-publish-sofa:
+  build-publish:
     strategy:
       fail-fast: false
       matrix:
