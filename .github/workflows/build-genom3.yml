@@ -14,6 +14,8 @@ on:
 jobs:
   check-depends-on-PR:
     runs-on: ubuntu-latest
+    # skip if event is closing PR without merging
+    if: ${{ !(github.event.action == 'closed' && github.event_name == 'pull_request' && github.event.pull_request.merged == false) }}
     steps:
       - name: Fail in case Pull Request is opened with label "depends-on"
         if: ${{ contains(github.event.pull_request.labels.*.name, 'depends-on') }}
@@ -37,6 +39,8 @@ jobs:
                  {platform: "osx-arm64", runner: "macos-latest"}]
 
     uses: ./.github/workflows/build_publish_package.yml
+    # skip if event is closing PR without merging
+    if: ${{ !(github.event.action == 'closed' && github.event_name == 'pull_request' && github.event.pull_request.merged == false) }}
     needs: check-depends-on-PR
     with:
       package-name: genom3
