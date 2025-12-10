@@ -5,8 +5,9 @@ on:
   # TODO this workflow should be cron-ed to test regularly if re-rendering is needed
   # (frequency depends on number of package dependencies that may have their pinning updated
   # on conda-forge)
-  # schedule:
-  #   - cron: 0 5 * * 0
+  # Here every sunday at 5am
+  schedule:
+    - cron: 0 5 * * 0
 
 jobs:
   rerender-genom3:
