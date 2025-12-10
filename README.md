@@ -44,8 +44,24 @@ Example of adding support for software `foo`:
      ```
      python scripts/filter_configs.py scripts/filter.yaml conda/recipes/foo/.ci_support/*.yaml
      ```
+  
 4. Update the GitHub actions workflows for building `foo` Conda package
    - Add a `build-foo.yml` file to add a workflow that will build & publish the Conda package of `foo`. You should basically copy-paste existing templates such as `build-genom3.yml` and replace `genom3` package name by yours for the three following YAML fields: `name`, `on.pull_request.paths`, `jobs.build-publish.with.package-name`. Note that this workflow is intented to be called either manually, either by top-level workflow such as `build-all`, either at any change of the package configuration files update.
-6. Update the GitHub actions workflows for re-rendering `foo` Conda package
-   TODO
+   - Add a job `build-package-foo` in `build-all.yml` workflow. This workflow launches the build of all packages in a order that respects the dependencies order of packages belonging to this forge. To do so, you must specify the **direct** jobs dependencies of your package in the `build-publish-foo.needs` field (e.g. `needs: [build-publish-genom3, build-publish-fooB]` if your job depends on `genom3` and `fooB`.
+5. Update the GitHub actions workflows for re-rendering `foo` Conda package
+   - Add a `rerender-foo` job in `rerender-all.yml` workflow. Similarly to `build-all.yml` workflow, you must list here direct dependencies. For example:
+     
+ ```
+ rerender-foo:
+   needs: [rerender-genom3, rerender-fooB]
+   uses: ./.github/workflows/rerender-package.yml
+   with:
+     package: foo
+     requires-prs: |
+       ${{ needs.rerender-genom3.outputs.pr-number }} 
+       ${{ needs.rerender-fooB.outputs.pr-number }}
+   secrets: inherit
+```
+
+  for a package `foo` that depends directly on packages `genom3` and `fooB`.
    
