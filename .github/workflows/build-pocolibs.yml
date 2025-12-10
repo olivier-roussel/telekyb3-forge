@@ -7,6 +7,7 @@ on:
     - opened
     - reopened
     - unlabeled
+    - closed
     paths:
       - '**/pocolibs/.ci_support/*.yaml'
 
@@ -42,6 +43,7 @@ jobs:
       runner: ${{ matrix.target.runner }}
       platform: ${{ matrix.target.platform }}
       channel: telekyb-forge
-      publish-package: true
+      # only publish packages on pull request merging OR when called manually through workflow_dispatch OR workflow call 
+      publish-package: ${{ (github.event_name == 'pull_request' && github.event.pull_request.merged == true) ||  github.event_name == 'workflow_dispatch' ||  github.event_name == 'workflow_call' }}
     secrets:
       api-key: ${{ secrets.PREFIX_DEV_API_KEY }}
