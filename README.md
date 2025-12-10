@@ -45,7 +45,7 @@ Example of adding support for software `foo`:
      python scripts/filter_configs.py scripts/filter.yaml conda/recipes/foo/.ci_support/*.yaml
      ```
 4. Update the GitHub actions workflows for building `foo` Conda package
-   TODO
+   - Add a `build-foo.yml` file to add a workflow that will build & publish the Conda package of `foo`. You should basically copy-paste existing templates such as `build-genom3.yml` and replace `genom3` package name by yours for the three following YAML fields: `name`, `on.pull_request.paths`, `jobs.build-publish.with.package-name`. Note that this workflow is intented to be called either manually, either by top-level workflow such as `build-all`, either at any change of the package configuration files update.
 6. Update the GitHub actions workflows for re-rendering `foo` Conda package
    TODO
    
