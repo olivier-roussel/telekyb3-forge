@@ -39,7 +39,7 @@ Example of adding support for software `foo`:
    git reset
    ```
    - `conda-smithy` should have added a lot of files/folders into your recipe folder `conda/recipes/foo`. You must remove everything it added excepted the directory `conda/recipes/foo/.ci_support/`, which contains the files we need.
-   - You can also remove unwanted platforms files from `conda/recipes/foo/.ci_support/` (e.g. `win_64_.yaml` if you don't need Windows support) and the `README.txt` file
+   - You must also remove unwanted platforms files from `conda/recipes/foo/.ci_support/` (e.g. `win_64_.yaml` if you don't need Windows support) and the `README.txt` file. To avoid that these unwanted files/platforms to be re-added by the future automatic re-rendering PRs, you must add a `.gitignore` file inside the directory `conda/recipes/foo/.ci_support/` which will contain the `README` file and un-wanted platforms if any (e.g. `win_64_.yaml`).
    - Filter all remaining configurations Yaml files in `conda/recipes/foo/.ci_support/` by:
      ```
      python scripts/filter_configs.py scripts/filter.yaml conda/recipes/foo/.ci_support/*.yaml
